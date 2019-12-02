@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logicAppName": {
+            "value": "challenge2rahulruikar"
+        },
+        "twilio": {
+            "value": {
+                "twilioConnectionName" : "twilioConnectionName",
+                "twilioSid" : "AC1f51be566a58545bc1fbf999cfd81acc",
+                "twilioToken" : "256f810ca587f773f341197b154710b9",
+                "fromPhoneNumber" : "+61332334333",
+                "toPhoneNumber" : "+61233334332"
+            }
+        }
+    }
+}
