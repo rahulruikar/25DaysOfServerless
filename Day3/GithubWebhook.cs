@@ -33,7 +33,7 @@ namespace Day3
                     {
                         ImageEntity entity = new ImageEntity(item.Author.Username, Guid.NewGuid().ToString())
                         {
-                            ImageUrl = gitPushEvent.Repository.HtmlUrl + "/" + file;
+                            ImageUrl = gitPushEvent.Repository.HtmlUrl + "/" + file
                         };
 
                         try
