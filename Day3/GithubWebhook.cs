@@ -24,18 +24,16 @@ namespace Day3
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var gitPushEvent = JsonConvert.DeserializeObject<GitPushEvent>(requestBody);
-            var _gitHubClient = new GitHubClient(new ProductHeaderValue("my-test-app"));
 
             foreach (var item in gitPushEvent.Commits)
             {
-                GitHubCommit commit = await _gitHubClient.Repository.Commit.Get(gitPushEvent.Repository.Id, item.Id);
-                foreach (var file in commit.Files)
+                foreach (var file in item.Added)
                 {
-                    if (file.Filename.ToLower().EndsWith(".png"))
+                    if (file.ToLower().EndsWith(".png"))
                     {
                         ImageEntity entity = new ImageEntity(item.Author.Username, Guid.NewGuid().ToString())
                         {
-                            ImageUrl = file.RawUrl
+                            ImageUrl = gitPushEvent.Repository.HtmlUrl + "/" + file;
                         };
 
                         try

@@ -9,10 +9,10 @@ namespace Day3.Models
 
         }
 
-        public ImageEntity(string owner, string commitId)
+        public ImageEntity(string owner, string rowKey)
         {
             PartitionKey = owner;
-            RowKey = commitId;
+            RowKey = rowKey;
         }
 
         public string ImageUrl { get; set; }

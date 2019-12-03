@@ -16,17 +16,14 @@ namespace Day3.Models
 
     public sealed class Repository
     {
-        [JsonProperty(PropertyName = "id")]
-        public long Id { get; set; }
-
-        [JsonProperty(PropertyName = "full_name")]
-        public string FullName { get; set; }
+        [JsonProperty(PropertyName = "html_url")]
+        public string HtmlUrl { get; set; }
     }
 
     public sealed class CommitItem
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
+        [JsonProperty(PropertyName = "added")]
+        public IEnumerable<string> Added { get; set; }
 
         [JsonProperty(PropertyName = "author")]
         public Author Author { get; set; }
