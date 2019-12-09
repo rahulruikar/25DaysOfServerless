@@ -1,0 +1,54 @@
+<html>
+<body>
+    <div id="app">
+        <h2>
+            Reindeer Guidance and Delivery System
+        </h2>
+        <h2>Status</h2>
+        <div>
+            <strong>{{message}}</strong>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1.1.2/dist/browser/signalr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <script>
+        const data = {
+              message: ''
+        }
+
+        const app = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+            }
+        });
+
+        const apiBaseUrl = 'http://localhost:7071/api';
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl(`${apiBaseUrl}/api`)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        console.log('connecting...');
+        connection.start()
+            .then((response) => {
+                console.log('connection established', response);
+            })
+            .catch(logError);
+
+        connection.on('SystemUpdates', systemUpdates);
+
+        function systemUpdates(message) {
+            data.message = message
+        }
+
+        function logError(err) {
+            console.error('Error establishing connection', err);
+        }
+
+    </script>
+</body>
+</html>
